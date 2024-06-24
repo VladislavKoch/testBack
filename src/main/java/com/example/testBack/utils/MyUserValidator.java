@@ -14,20 +14,20 @@ import java.util.Objects;
 public class MyUserValidator {
     private final MyUserRepository userRepository;
 
-    public void validateSave(MyUser user, Errors errors){
+    public void validateSave(MyUser user, Errors errors) {
         if (userRepository.existsByEmail(user.getEmail())) {
             errors.rejectValue("email", "", "This email is already used");
         }
-        if (userRepository.existsByUsername(user.getUsername())){
+        if (userRepository.existsByUsername(user.getUsername())) {
             errors.rejectValue("username", "", "This username is already used");
         }
     }
 
-    public void validateUpdate(MyUser updatedUser, Errors errors){
+    public void validateUpdate(MyUser updatedUser, Errors errors) {
         MyUser oldUser = userRepository.findById(updatedUser.getId()).orElseThrow(MyUserNotFoundException::new);
-        if (!Objects.equals(updatedUser.getEmail(), oldUser.getEmail())) {
-            if (userRepository.existsByEmail(updatedUser.getEmail())) {
-                errors.rejectValue("email", "", "This email is already used");
+        if (!Objects.equals(updatedUser.getUsername(), oldUser.getUsername())) {
+            if (userRepository.existsByUsername(updatedUser.getUsername())) {
+                errors.rejectValue("username", "", "This username is already used");
             }
         }
     }
