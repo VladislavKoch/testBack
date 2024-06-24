@@ -1,9 +1,9 @@
 package com.example.testBack.service;
 
 import com.example.testBack.entity.MyUser;
+import com.example.testBack.exception.MyUserNotFoundException;
 import com.example.testBack.repository.MyUserRepository;
 import com.example.testBack.service.serviceInterface.MyUserService;
-import com.example.testBack.exception.MyUserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

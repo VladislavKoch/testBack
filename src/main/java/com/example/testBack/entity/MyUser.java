@@ -1,8 +1,15 @@
 package com.example.testBack.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
 @Data
