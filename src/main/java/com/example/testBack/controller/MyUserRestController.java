@@ -9,13 +9,12 @@ import com.example.testBack.utils.MyUserValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+
+import static com.example.testBack.utils.AuthenticationServiceMock.checkAuthentication;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -37,4 +36,13 @@ public class MyUserRestController {
         log.info(String.format("user registered %s", LocalDateTime.now()));
         return converter.userToDto(savedUser);
     }
+
+    @GetMapping("/{id}")
+    public MyUserDTO getUser(@RequestHeader(value = "User-Id", required = false) Integer headerId,
+                             @PathVariable("id") int id){
+        checkAuthentication(headerId, id);
+        return converter.userToDto(userService.findUserById(id));
+    }
+
+
 }
