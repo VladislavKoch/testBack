@@ -1,4 +1,4 @@
-package com.example.test_back;
+package com.example.testBack;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

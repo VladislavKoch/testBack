@@ -1,4 +1,4 @@
-package com.example.test_back;
+package com.example.testBack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
