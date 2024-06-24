@@ -1,7 +1,7 @@
 package com.example.testBack.errorHandling;
 
 import com.example.testBack.dto.ErrorResponseDTO;
-import exception.MyUserNotFoundException;
+import com.example.testBack.exception.MyUserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
