@@ -6,22 +6,13 @@ import com.example.testBack.repository.MyUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class UserValidator implements Validator {
+public class MyUserValidator {
     private final MyUserRepository userRepository;
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return MyUser.class.equals(aClass);
-    }
-
-    @Override
-    public void validate(Object o, Errors errors) {}
 
     public void validateSave(MyUser user, Errors errors){
         if (userRepository.existsByEmail(user.getEmail())) {
