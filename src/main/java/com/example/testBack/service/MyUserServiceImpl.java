@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MyUserServiceImpl implements MyUserService {
     private final MyUserRepository userRepository;
+
     @Override
     public MyUser saveUser(MyUser user) {
         return userRepository.save(user);
@@ -26,6 +27,9 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Override
     public void deleteUserById(int id) {
+        if (!userRepository.existsById(id)) {
+            throw new MyUserNotFoundException();
+        }
         userRepository.deleteById(id);
     }
 
