@@ -15,4 +15,7 @@ public class DtoConverter {
     public MyUserDTO userToDto(MyUser user) {
         return modelMapper.map(user, MyUserDTO.class);
     }
+    public MyUser updateDtoToUser(MyUserUpdateDTO dto) {
+        return modelMapper.map(dto, MyUser.class);
+    }
 }
