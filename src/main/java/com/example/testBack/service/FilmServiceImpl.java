@@ -27,7 +27,12 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Set<Film> getAllFilms(){
+    public Set<Film> getAllFilms() {
         return new HashSet<>(filmRepository.findAll());
+    }
+
+    @Override
+    public boolean filmExistsById(int id) {
+        return filmRepository.existsById(id);
     }
 }
