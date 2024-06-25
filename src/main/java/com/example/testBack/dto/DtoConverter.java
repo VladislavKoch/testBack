@@ -1,5 +1,6 @@
 package com.example.testBack.dto;
 
+import com.example.testBack.entity.FavoriteRelation;
 import com.example.testBack.entity.Film;
 import com.example.testBack.entity.MyUser;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,14 @@ public class DtoConverter {
     }
     public FilmDTO FilmToDto(Film film) {
         return modelMapper.map(film, FilmDTO.class);
+    }
+    public FavoriteRelation dtoToFavoriteRelation(FavoriteRelationDTO dto) {
+        return FavoriteRelation.builder()
+                .userId(dto.getUserId())
+                .filmId(dto.getFilmId())
+                .build();
+    }
+    public FavoriteRelationDTO favoriteRelationToDto(FavoriteRelation relation) {
+        return modelMapper.map(relation, FavoriteRelationDTO.class);
     }
 }
