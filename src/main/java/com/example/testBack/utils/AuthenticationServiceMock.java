@@ -15,11 +15,11 @@ public class AuthenticationServiceMock {
         if (headerId == null) {
             throw new MyUserAuthenticationException("User-Id header is empty!");
         }
-        if (!userRepository.existsById(headerId)) {
-            throw new MyUserNotFoundException();
-        }
         if (headerId != id) {
             throw new MyUserAuthenticationException("User-Id header is not equals path id!");
+        }
+        if (!userRepository.existsById(headerId)) {
+            throw new MyUserNotFoundException();
         }
     }
 }
