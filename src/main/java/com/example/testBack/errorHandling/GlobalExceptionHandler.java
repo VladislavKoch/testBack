@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
     @ExceptionHandler({MyUserNotFoundException.class, DataIsNotCorrectException.class,
             MyUserAuthenticationException.class})
     protected ResponseEntity<?> handleRestControllersExceptions(ResponseStatusException ex) {

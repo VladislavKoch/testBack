@@ -1,6 +1,4 @@
 package com.example.testBack.entity;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +9,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +18,7 @@ import javax.validation.constraints.Pattern;
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @NotNull(message = "You must provide username")
     @Pattern(regexp = "[a-zA-Z]+", message = "Username must consist of letters of the Latin alphabet")
