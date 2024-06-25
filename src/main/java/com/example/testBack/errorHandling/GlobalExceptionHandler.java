@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<?> handleAllAnotherExceptions(Exception ex) {
-        log.debug(ex.getMessage());
+        log.warn(ex.getMessage());
         return new ResponseEntity<>(new InternalErrorDTO(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

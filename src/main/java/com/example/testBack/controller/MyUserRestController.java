@@ -5,6 +5,7 @@ import com.example.testBack.dto.MyUserDTO;
 import com.example.testBack.dto.MyUserUpdateDTO;
 import com.example.testBack.entity.MyUser;
 import com.example.testBack.service.serviceInterface.MyUserService;
+import com.example.testBack.utils.AuthenticationServiceMock;
 import com.example.testBack.utils.ErrorsUtil;
 import com.example.testBack.utils.MyUserValidator;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 
-import static com.example.testBack.utils.AuthenticationServiceMock.checkAuthentication;
-
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -25,6 +24,7 @@ public class MyUserRestController {
     private final MyUserService userService;
     private final DtoConverter converter;
     private final MyUserValidator userValidator;
+    private final AuthenticationServiceMock authenticationService;
 
     @PostMapping()
     public MyUserDTO createUser(@RequestBody @Valid MyUserDTO userDTO, BindingResult bindingResult) {
@@ -41,7 +41,7 @@ public class MyUserRestController {
     @GetMapping("/{id}")
     public MyUserDTO getUser(@RequestHeader(value = "User-Id", required = false) Integer headerId,
                              @PathVariable("id") int id) {
-        checkAuthentication(headerId, id);
+        authenticationService.checkAuthentication(headerId, id);
         return converter.userToDto(userService.findUserById(id));
     }
 
@@ -49,7 +49,7 @@ public class MyUserRestController {
     public MyUserDTO updateUser(@RequestHeader(value = "User-Id", required = false) Integer headerId,
                                 @PathVariable("id") int id, @RequestBody @Valid MyUserUpdateDTO userDTO,
                                 BindingResult bindingResult) {
-        checkAuthentication(headerId, id);
+        authenticationService.checkAuthentication(headerId, id);
         MyUser user = converter.updateDtoToUser(userDTO);
         enrichUser(user, id);
         userValidator.validateUpdate(user, bindingResult);
@@ -64,7 +64,7 @@ public class MyUserRestController {
     @DeleteMapping("/{id}")
     public void deleteUser(@RequestHeader(value = "User-Id", required = false) Integer headerId,
                            @PathVariable("id") int id){
-        checkAuthentication(headerId, id);
+        authenticationService.checkAuthentication(headerId, id);
         userService.deleteUserById(id);
     }
 
