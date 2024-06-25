@@ -10,4 +10,6 @@ import java.util.Set;
 @Transactional
 public interface FilmService {
     public Set<Film> saveNewFilms(Set<Film> films);
+    @Transactional(readOnly = true)
+    Set<Film> getAllFilms();
 }

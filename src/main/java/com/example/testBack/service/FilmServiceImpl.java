@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -25,5 +24,10 @@ public class FilmServiceImpl implements FilmService {
             filmRepository.saveAll(obtainedFilms);
         }
         return obtainedFilms;
+    }
+
+    @Override
+    public Set<Film> getAllFilms(){
+        return new HashSet<>(filmRepository.findAll());
     }
 }
