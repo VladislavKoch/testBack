@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,5 +30,4 @@ public class SchedulerConfig {
                     .map(Film::getId).collect(Collectors.toList()), LocalDateTime.now()));
         }
     }
-
 }
