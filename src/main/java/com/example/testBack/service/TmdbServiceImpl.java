@@ -1,5 +1,6 @@
 package com.example.testBack.service;
 
+import com.example.testBack.dto.DtoConverter;
 import com.example.testBack.dto.TmdbResponseDTO;
 import com.example.testBack.entity.Film;
 import com.example.testBack.service.serviceInterface.TmdbService;
@@ -17,12 +18,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class TmdbServiceImpl implements TmdbService {
     private final RestTemplate restTemplate;
+    private final DtoConverter converter;
+
     @Value("${tmdb.token}")
     String bearerToken;
     @Value("${tmdb.url}")
@@ -40,8 +44,7 @@ public class TmdbServiceImpl implements TmdbService {
                         restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),
                                 new ParameterizedTypeReference<>() {});
                 TmdbResponseDTO responseDto = filmResponse.getBody();
-                films.addAll(responseDto.getResults());
-
+                films.addAll(responseDto.getResults().stream().map(converter::dtoToFilm).collect(Collectors.toSet()));
             } catch (RestClientException | NullPointerException ex) {
                 log.warn(ex.getLocalizedMessage());
             }
