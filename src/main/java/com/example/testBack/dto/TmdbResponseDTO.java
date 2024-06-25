@@ -10,7 +10,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImdbResponseDTO {
+public class TmdbResponseDTO {
     private int page;
     private Set<Film> results;
 }
