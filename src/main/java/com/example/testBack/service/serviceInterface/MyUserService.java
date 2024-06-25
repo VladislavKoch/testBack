@@ -10,5 +10,8 @@ public interface MyUserService {
     public void deleteUserById(int id);
     @Transactional(readOnly = true)
     public MyUser findUserById(int id);
-
+    @Transactional(readOnly = true)
+    public boolean existsByUsername(String username);
+    @Transactional(readOnly = true)
+    public boolean existsByEmail(String email);
 }
