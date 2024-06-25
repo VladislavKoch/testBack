@@ -26,9 +26,9 @@ public class SchedulerConfig {
     public void everyThreeHourTmdbRequest() {
         Set<Film> films = tmdbService.findFirstFilms(5);
         Set<Film> savedFilms = filmService.saveNewFilms(films);
-        if(!savedFilms.isEmpty()) {
+        if (!savedFilms.isEmpty()) {
             log.info(String.format("ID: %s films are added %s", savedFilms.stream()
-                    .map(x->x.getId()).collect(Collectors.toList())), LocalDateTime.now());
+                    .map(Film::getId).collect(Collectors.toList()), LocalDateTime.now()));
         }
     }
 
