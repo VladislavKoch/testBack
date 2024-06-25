@@ -32,9 +32,23 @@ public class FavoriteRelationRestController {
         authenticationService.checkAuthentication(userId, relationDTO.getUserId());
         FavoriteRelation relation = converter.dtoToFavoriteRelation(relationDTO);
         relationValidator.validate(relation, bindingResult);
+        relationValidator.validateSave(relation, bindingResult);
         if (bindingResult.hasErrors()) {
             ErrorsUtil.sendErrorsToClient(bindingResult);
         }
         return converter.favoriteRelationToDto(relationService.addRelation(relation));
+    }
+
+    @DeleteMapping()
+    public void deleteFromFavorite(@RequestHeader(value = "User-Id", required = false) Integer userId,
+                                             @RequestBody @Valid FavoriteRelationDTO relationDTO,
+                                             BindingResult bindingResult) {
+        authenticationService.checkAuthentication(userId, relationDTO.getUserId());
+        FavoriteRelation relation = converter.dtoToFavoriteRelation(relationDTO);
+        relationValidator.validate(relation, bindingResult);
+        if (bindingResult.hasErrors()) {
+            ErrorsUtil.sendErrorsToClient(bindingResult);
+        }
+        relationService.deleteRelation(relation);
     }
 }
