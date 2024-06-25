@@ -19,15 +19,18 @@ public class FavoriteRelationValidator {
         if (errors.hasErrors()) {
             return;
         }
-        int filmId = relation.getFilmId();
-        int userId = relation.getUserId();
-        userService.findUserById(userId);
-        if (relationService.existRelationByUserIdAndFilmId(userId, filmId)) {
-            errors.rejectValue("filmId", "", "This relation is already exists");
-        }
-        if (!filmService.filmExistsById(filmId)) {
+        userService.findUserById(relation.getUserId());
+        if (!filmService.filmExistsById(relation.getFilmId())) {
             errors.rejectValue("filmId", "", "This film is not exists");
         }
     }
 
+    public void validateSave(FavoriteRelation relation, Errors errors) {
+        if (errors.hasErrors()) {
+            return;
+        }
+        if (relationService.existRelationByUserIdAndFilmId(relation.getUserId(), relation.getFilmId())) {
+            errors.rejectValue("filmId", "", "This relation is already exists");
+        }
+    }
 }
