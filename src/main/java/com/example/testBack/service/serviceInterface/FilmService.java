@@ -9,5 +9,5 @@ import java.util.Set;
 
 @Transactional
 public interface FilmService {
-    Set<Film> saveNewFilms(Set<Film> films);
+    public Set<Film> saveNewFilms(Set<Film> films);
 }
