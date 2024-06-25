@@ -12,5 +12,5 @@ import java.util.Set;
 @Builder
 public class TmdbResponseDTO {
     private int page;
-    private Set<Film> results;
+    private Set<FilmDTO> results;
 }
