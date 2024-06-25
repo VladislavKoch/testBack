@@ -11,4 +11,5 @@ public interface FilmService {
     public Set<Film> saveNewFilms(Set<Film> films);
     Set<Film> getAllFilms();
     boolean filmExistsById(int id);
+    Set<Film> getRecommendedFilms(String loaderType, int userId);
 }
